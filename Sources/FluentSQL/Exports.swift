@@ -24,6 +24,8 @@ public struct SQLList: SQLExpression {
 
     public func serialize(to serializer: inout SQLSerializer) {
         var first = true
+        serializer.write("(")
+
         for el in self.items {
             if !first {
                 serializer.write(" ")
@@ -33,6 +35,8 @@ public struct SQLList: SQLExpression {
             first = false
             el.serialize(to: &serializer)
         }
+
+        serializer.write(")")
     }
 }
 
